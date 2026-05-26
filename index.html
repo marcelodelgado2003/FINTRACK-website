@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINTRACK — Claridad financiera para Ecuador</title>
+<meta name="description" content="FINTRACK convierte los correos de tu banco en claridad financiera total. Automático, seguro, hecho para Ecuador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1C30;
+    --blue: #1D4ED8;
+    --blue-light: #EFF4FF;
+    --gray: #747686;
+    --light: #F8F9FF;
+    --border: #E5EEFF;
+    --white: #FFFFFF;
+    --green: #16A34A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 5%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--navy); }
+
+  .nav-cta {
+    background: var(--navy) !important;
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--blue) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, #EFF4FF 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: var(--navy);
+    max-width: 900px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span {
+    color: var(--blue);
+  }
+
+  .hero p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--gray);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    width: 100%;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .waitlist-form input {
+    flex: 1;
+    height: 52px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .waitlist-form input:focus { border-color: var(--blue); }
+  .waitlist-form input::placeholder { color: #C4C5D7; }
+
+  .waitlist-form button {
+    height: 52px;
+    padding: 0 24px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .waitlist-form button:hover { background: var(--blue); }
+  .waitlist-form button:active { transform: scale(0.98); }
+
+  .waitlist-note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--gray);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .success-msg {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: #F0FFF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 12px;
+    padding: 14px 20px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 15px;
+    max-width: 480px;
+    width: 100%;
+  }
+
+  .success-msg.show { display: flex; }
+
+  /* STATS */
+  .stats {
+    padding: 60px 5%;
+    background: var(--light);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .stats-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Manrope', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-number span { color: var(--blue); }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    padding: 100px 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 60px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .step:hover {
+    border-color: var(--blue);
+    transform: translateY(-3px);
+  }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--light);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--blue-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+
+  .feature-card h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* TRUST */
+  .trust {
+    background: var(--navy);
+    padding: 80px 5%;
+  }
+
+  .trust-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .trust .section-label { color: #637EAB; }
+  .trust .section-title { color: var(--white); }
+  .trust .section-sub { color: #637EAB; margin-bottom: 48px; }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .trust-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .trust-item h4 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .trust-item p {
+    font-size: 13px;
+    color: #637EAB;
+    line-height: 1.6;
+  }
+
+  .trust-check {
+    width: 28px;
+    height: 28px;
+    background: rgba(29, 78, 216, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--blue);
+    background: var(--blue-light);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--blue);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .pricing-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .pricing-price {
+    font-family: 'Manrope', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-price span {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 0;
+  }
+
+  .pricing-desc {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pricing-features li {
+    font-size: 14px;
+    color: var(--navy);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--blue);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* BANKS */
+  .banks {
+    text-align: center;
+    padding: 60px 5%;
+    background: var(--light);
+    border-top: 0.5px solid var(--border);
+  }
+
+  .banks p {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .bank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .bank-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 100px 5%;
+    text-align: center;
+    background: var(--white);
+  }
+
+  .cta-section .section-title {
+    max-width: 700px;
+    margin: 0 auto 16px;
+  }
+
+  .cta-section .section-sub {
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .cta-form input {
+    flex: 1;
+    height: 52px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-form input:focus { border-color: var(--blue); }
+  .cta-form input::placeholder { color: #C4C5D7; }
+
+  .cta-form button {
+    height: 52px;
+    padding: 0 24px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .cta-form button:hover { background: var(--navy); }
+  .cta-form button:active { transform: scale(0.98); }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 5%;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--navy);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--navy); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .waitlist-form { flex-direction: column; }
+    .waitlist-form button { width: 100%; }
+    .cta-form { flex-direction: column; }
+    .cta-form button { width: 100%; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">FINTRACK</a>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#caracteristicas">Características</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#lista-espera" class="nav-cta">Lista de espera</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-badge">Hecho para Ecuador — Pronto disponible</div>
+  <h1>Por primera vez,<br><span>claridad total</span><br>sobre tu dinero.</h1>
+  <p>FINTRACK convierte los correos de notificación de tu banco en un dashboard financiero claro y completo — automáticamente, sin conectarse a tu cuenta bancaria.</p>
+
+  <div class="waitlist-form" id="hero-form">
+    <input type="email" id="hero-email" placeholder="tu@correo.com" autocomplete="email">
+    <button onclick="submitWaitlist('hero')">Unirme →</button>
+  </div>
+  <div class="success-msg" id="hero-success">
+    ✓ &nbsp;Estás en la lista. Te avisamos cuando lancemos.
+  </div>
+  <p class="waitlist-note">Descarga gratis. Disponible pronto en App Store y Google Play.</p>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-number"><span>67%</span></div>
+      <div class="stat-label">de ecuatorianos aún usa Excel para sus finanzas</div>
+    </div>
+    <div>
+      <div class="stat-number"><span>4.7M</span></div>
+      <div class="stat-label">ecuatorianos sin historial crediticio formal</div>
+    </div>
+    <div>
+      <div class="stat-number"><span>89%</span></div>
+      <div class="stat-label">de usuarios consideran la solución muy útil</div>
+    </div>
+    <div>
+      <div class="stat-number"><span>$0</span></div>
+      <div class="stat-label">para empezar — gratis para siempre en el plan básico</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="como-funciona">
+  <div class="fade-in">
+    <p class="section-label">Cómo funciona</p>
+    <h2 class="section-title">Tu banco ya te avisa. FINTRACK lo organiza.</h2>
+    <p class="section-sub">Sin conectarse directamente a tu banco. Sin ingresar nada a mano. Solo tu correo — que ya tenías.</p>
+  </div>
+  <div class="steps fade-in">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Conecta Gmail una vez</h3>
+      <p>Autorizas a FINTRACK con acceso de solo lectura. Google muestra exactamente qué permisos otorgas. Nunca guardamos tu contraseña.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Detectamos tus transacciones</h3>
+      <p>FINTRACK busca únicamente correos de bancos ecuatorianos — Pichincha, Produbanco, Guayaquil, Internacional, Diners y más.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Categorizamos automáticamente</h3>
+      <p>Cada gasto se organiza en categorías — Restaurantes, Transporte, Salud, Supermercados — con inteligencia artificial.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Ves tu dinero con claridad</h3>
+      <p>Un dashboard limpio muestra exactamente en qué gastas, cuánto te queda de presupuesto, y cómo mejorar tus finanzas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="padding: 0 5% 100px; max-width: 1100px; margin: 0 auto;" id="caracteristicas">
+  <div class="fade-in">
+    <p class="section-label">Características</p>
+    <h2 class="section-title">Todo lo que necesitas para entender tu dinero.</h2>
+    <p class="section-sub">Desde presupuestos inteligentes hasta inteligencia fiscal SRI — hecho para la realidad ecuatoriana.</p>
+  </div>
+  <div class="features-grid fade-in">
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Dashboard en tiempo real</h3>
+      <p>Visualiza tus gastos por categoría, historial de 6 meses, y tendencias. Se actualiza automáticamente cada vez que llega un correo bancario.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Presupuestos con alertas</h3>
+      <p>Crea límites mensuales por categoría. Recibe alertas automáticas al 80% y al 100% de tu presupuesto antes de pasarte.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧾</div>
+      <h3>Tax Intelligence SRI</h3>
+      <p>Clasifica automáticamente tus gastos deducibles y calcula tu Impuesto a la Renta estimado según las tablas SRI 2025/2026.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💳</div>
+      <h3>Control de deudas</h3>
+      <p>Registra tus deudas y ve exactamente cuándo terminas de pagar. Simulador de pagos con estrategias Avalancha y Bola de Nieve.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>Pagos diferidos</h3>
+      <p>Gestiona tus cuotas diferidas con seguimiento de intereses, próximos vencimientos, y alertas cuando acumulas demasiados compromisos.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>Asesor proactivo</h3>
+      <p>19 agentes de IA trabajan en segundo plano. Te avisan antes de que se te acabe el presupuesto, detectan patrones peligrosos, y te dan insights personalizados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / SECURITY -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="fade-in">
+      <p class="section-label">Seguridad</p>
+      <h2 class="section-title" style="color: white;">Tu seguridad es nuestra prioridad.</h2>
+      <p class="section-sub">FINTRACK nunca se conecta a tu banco. Solo lee los correos que el banco ya te envió.</p>
+    </div>
+    <div class="trust-grid fade-in">
+      <div class="trust-item">
+        <div class="trust-check">🔒</div>
+        <h4>Solo lectura de Gmail</h4>
+        <p>Acceso de solo lectura a correos bancarios. Nunca enviamos ni modificamos nada. Revoca el acceso en cualquier momento.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check">🛡️</div>
+        <h4>6 capas de seguridad</h4>
+        <p>Cifrado TLS 1.3, Face ID, protección de sesiones, bloqueo de IPs, guardrails de IA, y cumplimiento LOPDP Ecuador.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check">🇪🇨</div>
+        <h4>Cumple la LOPDP</h4>
+        <p>Cumplimos con la Ley Orgánica de Protección de Datos Personales de Ecuador. Tus datos son tuyos.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-check">🏦</div>
+        <h4>Sin acceso bancario</h4>
+        <p>FINTRACK nunca se conecta a tu cuenta bancaria. Solo organiza correos que ya recibiste. Seguro por diseño.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BANKS -->
+<div class="banks">
+  <p>Compatible con los bancos ecuatorianos principales</p>
+  <div class="bank-list">
+    <span class="bank-pill">Banco Pichincha</span>
+    <span class="bank-pill">Produbanco</span>
+    <span class="bank-pill">Banco Guayaquil</span>
+    <span class="bank-pill">Banco Internacional</span>
+    <span class="bank-pill">Diners Club</span>
+    <span class="bank-pill">Banco del Pacífico</span>
+    <span class="bank-pill">BIESS</span>
+    <span class="bank-pill">JEP Cooperativa</span>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="section" id="precios">
+  <div class="fade-in">
+    <p class="section-label">Precios</p>
+    <h2 class="section-title">Menos de lo que cuesta un café al mes.</h2>
+    <p class="section-sub">Empieza gratis. Actualiza cuando veas el valor.</p>
+  </div>
+  <div class="pricing-grid fade-in">
+    <div class="pricing-card">
+      <p class="pricing-name">Gratis</p>
+      <p class="pricing-price">$0<span>/mes</span></p>
+      <p class="pricing-desc">Para empezar a conocer el producto.</p>
+      <ul class="pricing-features">
+        <li>Dashboard básico</li>
+        <li>Ingreso manual de transacciones</li>
+        <li>Historial limitado</li>
+        <li>Ver categorías de gastos</li>
+      </ul>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">MÁS POPULAR</div>
+      <p class="pricing-name">Premium</p>
+      <p class="pricing-price">$2.99<span>/mes</span></p>
+      <p class="pricing-desc">Todo lo que necesitas para tomar control.</p>
+      <ul class="pricing-features">
+        <li>Sincronización automática Gmail</li>
+        <li>Categorización con IA</li>
+        <li>Presupuestos con alertas</li>
+        <li>Historial completo</li>
+        <li>Análisis avanzados</li>
+        <li>Control de deudas y diferidos</li>
+        <li>Asesor financiero proactivo</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <p class="pricing-name">Tax Pro</p>
+      <p class="pricing-price">$5.99<span>/mes</span></p>
+      <p class="pricing-desc">Para optimizar tu declaración de impuestos.</p>
+      <ul class="pricing-features">
+        <li>Todo lo de Premium</li>
+        <li>Clasificación automática SRI</li>
+        <li>Cálculo estimado IR 2025/2026</li>
+        <li>Seguimiento gastos deducibles</li>
+        <li>Alertas fechas límite SRI</li>
+        <li>Optimizador fiscal fin de año</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section" id="lista-espera">
+  <p class="section-label" style="text-align:center;">Lista de espera</p>
+  <h2 class="section-title fade-in">Sé de los primeros en Ecuador.</h2>
+  <p class="section-sub fade-in">Únete a la lista y sé de los primeros en acceder cuando lancemos.</p>
+  <div class="cta-form fade-in">
+    <input type="email" id="cta-email" placeholder="tu@correo.com" autocomplete="email">
+    <button onclick="submitWaitlist('cta')">Quiero acceso →</button>
+  </div>
+  <div class="success-msg" id="cta-success" style="margin: 16px auto 0;">
+    ✓ &nbsp;Estás en la lista. Te avisamos cuando lancemos.
+  </div>
+  <p style="margin-top: 14px; font-size: 12px; color: var(--gray);">Sin spam. Solo te avisamos cuando lancemos.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">FINTRACK</span>
+  <ul class="footer-links">
+    <li><a href="/privacy">Política de Privacidad</a></li>
+    <li><a href="/terms">Términos y Condiciones</a></li>
+    <li><a href="mailto:soporte@fintrack.biz">Soporte</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 FINTRACK S.A.S. Ecuador</span>
+</footer>
+
+<script>
+function submitWaitlist(source) {
+  const emailInput = document.getElementById(source === 'hero' ? 'hero-email' : 'cta-email');
+  const email = emailInput.value.trim();
+
+  if (!email || !email.includes('@')) {
+    emailInput.style.borderColor = '#EF4444';
+    emailInput.focus();
+    setTimeout(() => emailInput.style.borderColor = '', 2000);
+    return;
+  }
+
+  const form = document.getElementById(source === 'hero' ? 'hero-form' : 'cta-form');
+  const success = document.getElementById(source === 'hero' ? 'hero-success' : 'cta-success');
+
+  form.style.display = 'none';
+  success.classList.add('show');
+
+  // Store email locally for now
+  const waitlist = JSON.parse(localStorage.getItem('fintrack_waitlist') || '[]');
+  waitlist.push({ email, date: new Date().toISOString(), source });
+  localStorage.setItem('fintrack_waitlist', JSON.stringify(waitlist));
+}
+
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Enter key on email inputs
+document.getElementById('hero-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitWaitlist('hero');
+});
+document.getElementById('cta-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitWaitlist('cta');
+});
+</script>
+</body>
+</html>
