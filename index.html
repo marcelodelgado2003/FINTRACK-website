@@ -956,7 +956,7 @@ async function submitWaitlist(source) {
     return;
   }
 
-  const form = document.getElementById(source === 'hero' ? 'hero-form' : 'cta-form');
+  const form = document.getElementById(source === 'hero' ? 'hero-form' : 'cta-form'); if (!form) return;
   const success = document.getElementById(source === 'hero' ? 'hero-success' : 'cta-success');
 
   try {
@@ -972,14 +972,14 @@ async function submitWaitlist(source) {
     });
 
     if (response.ok || response.status === 409) {
-      form.style.display = 'none';
-      success.classList.add('show');
+      if (form) form.style.display = 'none';
+      if (success) success.classList.add('show');
     } else {
       throw new Error('Failed');
     }
   } catch (err) {
-    form.style.display = 'none';
-    success.classList.add('show');
+    if (form) form.style.display = 'none';
+    if (success) success.classList.add('show');
     console.error('Waitlist error:', err);
   }
 }
